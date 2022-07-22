@@ -1,5 +1,5 @@
 package com.codeup.adlister.controllers;
-
+import com.codeup.adlister.util.Password;
 import com.codeup.adlister.dao.DaoFactory;
 import com.codeup.adlister.models.User;
 
@@ -34,7 +34,7 @@ public class RegisterServlet extends HttpServlet {
         }
 
         // create and save a new user
-        User user = new User(username, email, password);
+        User user = new User(username, email, password.hash(password));
         DaoFactory.getUsersDao().insert(user);
         response.sendRedirect("/login");
     }
